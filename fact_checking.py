@@ -192,7 +192,7 @@ def build_vocabulary(df: pd.DataFrame) -> (Dict[int, str],Dict[str, int],List[st
 corpus = pd.concat([trainData.Claim,trainData.Evidence,valData.Claim,valData.Evidence],ignore_index=True)
 idx_to_word, word_to_idx, word_listing = build_vocabulary(corpus)
 
-embedding_dimension = 50
+embedding_dimension = 300
 download_path = "glove-wiki-gigaword-{}".format(embedding_dimension)
 
 try:
@@ -482,7 +482,7 @@ def evaluate_predictions(predictions: np.ndarray,
 # Training
 training_info = {
     'verbose': 1,
-    'epochs': 1,
+    'epochs': 30,
     'batch_size': 128,
     'callbacks': [keras.callbacks.EarlyStopping(monitor='val_loss', 
                                                 patience=10,
