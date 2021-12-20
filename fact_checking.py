@@ -28,6 +28,7 @@ from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras import backend as K
 from sklearn.metrics import classification_report
+from tensorflow.python.framework import ops
 
 
 #load data
@@ -523,6 +524,8 @@ model_result=[]
 # print(report)
 for ms in merging_strategy:
     for cm in create_models:
+        K.clear_session()
+        ops.reset_default_graph()
         print('=================================================================')
         model = create_models[cm](ms,compile_info) 
         model = train_model(model=model, x_train_Claim=x_train_Claim, x_train_Evidence=x_train_Evidence,y_train=y_train,
